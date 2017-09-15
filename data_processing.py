@@ -35,7 +35,7 @@ def retrive_all_unique_names():
                 name_list.append(','.join([ names[0],' '.join(names[1:-1]),names[-1]]))
 
         elif len(names)==1:
-            name_list.append(','.join(names[0],'',''))
+            name_list.append(','.join([names[0],'','']))
 
     print 'add  advisors:',len(name_list)
 
