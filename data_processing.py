@@ -20,6 +20,8 @@ def retrive_all_unique_names():
     ## add advisors' name
     sql = 'select adviser_name from proquest_article_adviser'
 
+    '''这里有很多长度大于四的如何处理？'''
+
     cursor = query_op.query_database(sql)
     for row in cursor:
         names = row[0].split()
@@ -28,11 +30,15 @@ def retrive_all_unique_names():
         elif len(names)==2:
             name_list.append(','.join([names[0],'',names[1]]))
         elif len(names)>3:
-            print row[0]
+            if ',' in row[0]:
+                names = row[0].split(',')[0].split()
+                name_list.append(','.join(names[0],' '.join(names[1:-1],names[-1])))
+
         elif len(names)==1:
-            print row[0]
+            name_list.append(','.join(names[0],'',''))
 
     print 'add  advisors:',len(name_list)
+
 
     name_list = list(set(name_list))
 
