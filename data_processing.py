@@ -68,7 +68,7 @@ def retirve_aminer_unique_names(aminer_names):
             print splits
             continue
 
-        first,last = splits
+        first,last = author['lastname_firstname']
 
         mid =  author['middlename']
         if mid is None or mid=='null':
