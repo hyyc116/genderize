@@ -67,7 +67,7 @@ def retirve_aminer_unique_names(aminer_names):
         splits = author['lastname_firstname'].split(',')
 
         if len(splits)!=2:
-            multis.append(author['lastname_firstname'])
+            multis.append(unicode.decode(author['lastname_firstname'],errors='ignore'))
             multi_count+=1
             continue
 
@@ -78,7 +78,7 @@ def retirve_aminer_unique_names(aminer_names):
             mid = ""
 
         name = ','.join([first,mid,last])
-        name_List.append(name)
+        name_List.append(unicode.decode(name),errors='ignore')
 
     print len(name_List)
     name_set = list(set(name_List))
