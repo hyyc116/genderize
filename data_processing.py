@@ -30,7 +30,7 @@ def retrive_proquest_unique_names():
     cursor = query_op.query_database(sql)
     for row in cursor:
         names = row[0].split()
-        name_list.append(names[0].lowercase())
+        name_list.append(names[0].lower())
 
     print 'add  advisors:',len(name_list)
 
@@ -69,7 +69,7 @@ def retirve_aminer_unique_names(aminer_names,other_names):
 
 
         name = first
-        name_List.append(name.encode('utf-8', 'ignore').lowercase())
+        name_List.append(name.encode('utf-8', 'ignore').lower())
 
     print len(name_List)
     name_set = list(set(name_List))
