@@ -12,8 +12,13 @@ import logging
 
 class dbop:
 
-    def __init__(self,insert_index=0,isSS=False):
+    def __init__(self,insert_index=0):
         
+        self._insert_index=insert_index
+        self._insert_values=[]
+
+
+    def connect_aws(self,isSS=False):
         if isSS:
             logging.debug("connect database with normal SScursor.")
             self._db = MySQLdb.connect("localhost","root","irlab2013","aws",cursorclass = cursors.SSCursor)
@@ -21,9 +26,17 @@ class dbop:
             logging.debug("connect database with normal cursor.")
             self._db = MySQLdb.connect("localhost","root","irlab2013","aws")    
         self._cursor = self._db.cursor()
-        
-        self._insert_index=insert_index
-        self._insert_values=[]
+
+
+    def connect_wos(self,isSS=False):
+        if isSS:
+            logging.debug("connect database with normal SScursor.")
+            self._db = MySQLdb.connect("localhost","root","irlab2013","aws",cursorclass = cursors.SSCursor)
+        else:
+            logging.debug("connect database with normal cursor.")
+            self._db = MySQLdb.connect("localhost","root","irlab2013","aws")    
+        self._cursor = self._db.cursor()
+
 
 
     def query_database(self,sql):

@@ -1,8 +1,10 @@
 #coding:utf8
 from db_util import *
+import json
 
-def retrive_all_unique_names():
+def retrive_proquest_unique_names():
     query_op = dbop()
+    query_op.connect_aws()
     sql = 'select first_name,middle_name,last_name from  proquest_article_authorname'
     cursor  = query_op.query_database(sql)
 
@@ -47,5 +49,27 @@ def retrive_all_unique_names():
 
     open('unique_names.txt','w').write('\n'.join(name_list))
 
+
+def retirve_aminer_unique_names(aminer_names):
+    author_list = json.loads(open(aminer_names))['RECORDS']
+    name_List =[]
+    for author in author_list:
+        last,first = author['lastname_firstname'].split(',')
+        mid =  author['middlename']
+        if mid is None or mid=='null':
+            mid = ""
+
+        name = ','.join([first,mid,last])
+        name_List.append(name)
+
+    print len(name_List)
+    name_set = list(set(name_List))
+    print len(name_set)
+
+
+    open('aminer_names.txt','w').write('\n'.join(name_set))
+
+
 if __name__ == '__main__':
-     retrive_all_unique_names() 
+    retirve_aminer_unique_names(sys.argv[1])
+    
