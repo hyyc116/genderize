@@ -30,7 +30,7 @@ def retrive_proquest_unique_names():
     cursor = query_op.query_database(sql)
     for row in cursor:
         names = row[0].split()
-        name_list.append(names[0])
+        name_list.append(names[0].lowercase())
 
     print 'add  advisors:',len(name_list)
 
@@ -41,9 +41,10 @@ def retrive_proquest_unique_names():
 
 
     open('unique_names.txt','w').write('\n'.join(name_list))
+    return name_list
 
 
-def retirve_aminer_unique_names(aminer_names):
+def retirve_aminer_unique_names(aminer_names,other_names):
     author_list = json.loads(open(aminer_names).read())['RECORDS']
     name_List =[]
     length =  len(author_list)
@@ -68,7 +69,7 @@ def retirve_aminer_unique_names(aminer_names):
 
 
         name = first
-        name_List.append(name.encode('utf-8', 'ignore'))
+        name_List.append(name.encode('utf-8', 'ignore').lowercase())
 
     print len(name_List)
     name_set = list(set(name_List))
@@ -78,8 +79,14 @@ def retirve_aminer_unique_names(aminer_names):
     open('aminer_names.txt','w').write('\n'.join(name_set))
     open('multi.txt','w').write('\n'.join(multis))
 
+    other_names.extend(name_set)
+
+    print len(other_names)
+
+    open('all_names.txt','w').write('\n'.join(other_names))
+
 
 if __name__ == '__main__':
-    retrive_proquest_unique_names()
-    retirve_aminer_unique_names(sys.argv[1])
+    anames = retrive_proquest_unique_names()
+    retirve_aminer_unique_names(sys.argv[1],anames)
     
