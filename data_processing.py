@@ -51,7 +51,7 @@ def retrive_proquest_unique_names():
 
 
 def retirve_aminer_unique_names(aminer_names):
-    author_list = json.loads(open(aminer_names))['RECORDS']
+    author_list = json.loads(open(aminer_names).read())['RECORDS']
     name_List =[]
     for author in author_list:
         last,first = author['lastname_firstname'].split(',')
