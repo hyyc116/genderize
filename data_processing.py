@@ -14,7 +14,7 @@ def retrive_proquest_unique_names():
     name_set = []
     for row in cursor:
         # name  = ','.join(row)
-        name_set.append(row[0])
+        name_set.append(row[0].lower())
 
     print 'article authors:',len(name_set)
 
