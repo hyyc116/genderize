@@ -55,6 +55,8 @@ def retirve_aminer_unique_names(aminer_names):
     name_List =[]
     length =  len(author_list)
     process =0
+    multi_count=0
+    multis = []
     for author in author_list:
         
         process+=1
@@ -65,10 +67,11 @@ def retirve_aminer_unique_names(aminer_names):
         splits = author['lastname_firstname'].split(',')
 
         if len(splits)!=2:
-            print author['lastname_firstname']
+            multis.append(author['lastname_firstname'])
+            multi_count+=1
             continue
 
-        first,last = splits
+        last,first = splits
 
         mid =  author['middlename']
         if mid is None or mid=='null':
@@ -83,6 +86,7 @@ def retirve_aminer_unique_names(aminer_names):
 
 
     open('aminer_names.txt','w').write('\n'.join(name_set))
+    open('multi.txt','w').write('\n'.join(multis))
 
 
 if __name__ == '__main__':
