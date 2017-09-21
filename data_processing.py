@@ -1,6 +1,9 @@
 #coding:utf8
 from db_util import *
 import json
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def retrive_proquest_unique_names():
     query_op = dbop()
@@ -67,7 +70,7 @@ def retirve_aminer_unique_names(aminer_names):
         splits = author['lastname_firstname'].split(',')
 
         if len(splits)!=2:
-            multis.append(unicode.decode(author['lastname_firstname'],errors='ignore'))
+            multis.append(author['lastname_firstname'].encode('utf-8', 'ignore'))
             multi_count+=1
             continue
 
@@ -78,7 +81,7 @@ def retirve_aminer_unique_names(aminer_names):
             mid = ""
 
         name = ','.join([first,mid,last])
-        name_List.append(unicode.decode(name,errors='ignore'))
+        name_List.append(name.encode('utf-8', 'ignore'))
 
     print len(name_List)
     name_set = list(set(name_List))
