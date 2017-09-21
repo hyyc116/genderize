@@ -9,6 +9,8 @@ import re
 import codecs
 import random as rn
 import logging
+import psycopg2
+
 
 class dbop:
 
