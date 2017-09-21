@@ -78,7 +78,7 @@ def retirve_aminer_unique_names(aminer_names):
             mid = ""
 
         name = ','.join([first,mid,last])
-        name_List.append(unicode.decode(name),errors='ignore')
+        name_List.append(unicode.decode(name,errors='ignore'))
 
     print len(name_List)
     name_set = list(set(name_List))
