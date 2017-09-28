@@ -85,7 +85,7 @@ def retirve_aminer_unique_names(aminer_names,other_names):
 
 
     ## 对名字进行处理
-    ss = ['`','#',"&","\\","'",'.','?','<','>']
+    ss = ['`','#',"&","\\","'",'.','?','<','>','_']
     all_names=[]
     for name in other_names:
         is_c = True
