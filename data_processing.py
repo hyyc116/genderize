@@ -108,6 +108,8 @@ def retirve_aminer_unique_names(aminer_names,other_names):
 
     all_names = list(set(all_names))
 
+    print 'length of final names:',len(all_names)
+
     open('all_names.txt','w').write('\n'.join(all_names))
 
 
