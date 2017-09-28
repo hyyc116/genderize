@@ -16,7 +16,7 @@ def retrieve_gender(name):
 
     return response.read()
 
-def retrieve_gender_list(namelist):
+def retrieve_gender_list(namelist, already_list):
     length  = len(namelist)
     logging.info('length of name list : {:}'.format(len(namelist)))
 
@@ -32,11 +32,21 @@ def retrieve_gender_list(namelist):
 
         nameparams = ''
         for ni,name in enumerate(namelist[start:end]):
+            if name in already_list:
+                continue
             nameparams+='name[{:}]={:}'.format(ni,name)
             nameparams+='&'
+
+        if nameparams=='':
+            logging.info('already fecthed!')
+            continue
+
         url = 'https://api.genderize.io/?apikey=01071d7ac81d34877334b58423265a2c&'+nameparams[:-1]
         # print url
-        response = urllib2.urlopen(url)
+        try:
+            response = urllib2.urlopen(url)
+        except:
+            logging.info('ERROR, NAME={:}'.format('##'.join(namelist[start:end])))
 
         parse_json(response.read())
 
@@ -56,9 +66,10 @@ def parse_json(result):
         print '{:}\t{:}\t{:}'.format(sig,obj['name'].decode('utf8',errors='ignore'),json.dumps(obj))
 
 
-def parse_names_of_all(path):
+def parse_names_of_all(path,already):
     namelist = [name.strip() for name in open(path)]
-    retrieve_gender_list(namelist)
+    already_list = set([name.strip().split('\t')[1] for name in open(already)])
+    retrieve_gender_list(namelist,already_list)
 
 if __name__ == '__main__':
     # result =  retrieve_gender('petersss')
@@ -66,7 +77,7 @@ if __name__ == '__main__':
     # namelist = ['peter','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy']
     # retrieve_gender_list(namelist)
 
-    parse_names_of_all(sys.argv[1])
+    parse_names_of_all(sys.argv[1],sys.argv[2])
 
 
 
