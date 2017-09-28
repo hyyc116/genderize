@@ -5,7 +5,7 @@ import sys
 import json
 import logging
 reload(sys)
-sys.getdefaultencoding('utf-8')
+sys.setdefaultencoding('utf-8')
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.DEBUG)
 
 
