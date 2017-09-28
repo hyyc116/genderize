@@ -29,8 +29,8 @@ def retrieve_gender_list(namelist):
             end = length
 
         nameparams = ''
-        for i,name in enumerate(namelist[start:end]):
-            nameparams+='name[{:}]={:}'.format(i,name)
+        for ni,name in enumerate(namelist[start:end]):
+            nameparams+='name[{:}]={:}'.format(ni,name)
             nameparams+='&'
         url = 'https://api.genderize.io/?apikey=01071d7ac81d34877334b58423265a2c&'+nameparams[:-1]
         print url
