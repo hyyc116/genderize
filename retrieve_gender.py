@@ -4,6 +4,8 @@ import urllib2
 import sys
 import json
 import logging
+reload(sys)
+sys.getdefaultencoding('utf-8')
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.DEBUG)
 
 
@@ -33,7 +35,7 @@ def retrieve_gender_list(namelist):
             nameparams+='name[{:}]={:}'.format(ni,name)
             nameparams+='&'
         url = 'https://api.genderize.io/?apikey=01071d7ac81d34877334b58423265a2c&'+nameparams[:-1]
-        print url
+        # print url
         response = urllib2.urlopen(url)
 
         parse_json(response.read())
@@ -51,7 +53,7 @@ def parse_json(result):
             sig = 'NO'
         else:
             sig = 'YES'
-        print '{:}\t{:}\t{:}'.format(sig,obj['name'],json.dumps(obj))
+        print '{:}\t{:}\t{:}'.format(sig,obj['name'].decode('utf8',errors='ignore'),json.dumps(obj))
 
 
 def parse_names_of_all(path):
