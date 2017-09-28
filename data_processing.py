@@ -97,10 +97,10 @@ def retirve_aminer_unique_names(aminer_names,other_names):
         
         if is_c:
             if '-' in name:
-                ns = [a for a in name.split('\-') if len(a)>1]
+                ns = [a.strip() for a in name.split('\-') if len(a)>1]
                 all_names.extend(ns)
             else:
-                all_names.append(name)
+                all_names.append(name.strip())
 
     all_names = list(set(all_names))
 
