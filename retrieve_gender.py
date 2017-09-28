@@ -47,7 +47,8 @@ def retrieve_gender_list(namelist, already_list):
             response = urllib2.urlopen(url)
         except:
             logging.info('ERROR, NAME={:}'.format('##'.join(namelist[start:end])))
-            logging.info('ERROR, ERROR PATH: {:}'.format(url))
+            logging.info('ERROR, ERROR url: {:}'.format(url))
+            continue
 
         parse_json(response.read())
 
