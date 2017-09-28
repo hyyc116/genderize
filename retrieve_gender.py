@@ -32,7 +32,7 @@ def retrieve_gender_list(namelist):
         for i,name in enumerate(namelist[start:end]):
             nameparams+='name[{:}]={:}'.format(i,name)
             nameparams+='&'
-        url = 'https://api.genderize.io/?'+nameparams[:-1]
+        url = 'https://api.genderize.io/?apikey=01071d7ac81d34877334b58423265a2c&'+nameparams[:-1]
         print url
         response = urllib2.urlopen(url)
 
@@ -61,8 +61,10 @@ def parse_names_of_all(path):
 if __name__ == '__main__':
     # result =  retrieve_gender('petersss')
 
-    namelist = ['peter','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy']
-    retrieve_gender_list(namelist)
+    # namelist = ['peter','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy','lily','lucy']
+    # retrieve_gender_list(namelist)
+
+    parse_names_of_all(sys.argv[1])
 
 
 
