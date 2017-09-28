@@ -83,7 +83,27 @@ def retirve_aminer_unique_names(aminer_names,other_names):
 
     print len(other_names)
 
-    open('all_names.txt','w').write('\n'.join(other_names))
+
+    ## 对名字进行处理
+    ss = ['`','#',"&","\\","'",'.']
+    is_c = True
+    all_names=[]
+    for name in other_names:
+        for s in ss:
+            if s in name:
+                is_c = False
+                break
+        
+        if is_c:
+            if '-' in name:
+                ns = [a for a in name.split('\-') if len(a)>1]
+                all_names.extend(ns)
+            else:
+                all_names.append
+
+    all_names = list(set(all_names))
+
+    open('all_names.txt','w').write('\n'.join(all_names))
 
 
 if __name__ == '__main__':
