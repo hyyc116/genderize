@@ -119,8 +119,8 @@ def percent_of_request(genderpath):
         line = line.strip()
         splits = line.split('\t')
         if splits[0]=='YES':
-            g = json.loads(splits[-1])['gender']
-            name_dict[splits[1]] = g
+            # g = json.loads(splits[-1])['gender']
+            name_dict[splits[1]] = splits[-1]
 
 
     query_op = dbop()
@@ -150,14 +150,20 @@ def percent_of_request(genderpath):
     genders = []
     for name in name_list:
         if name_dict.get(name,-1)!=-1:
-            genders.append(name_dict[name])
+            g = json.loads(name_dict[name])['gender']
+            genders.append(g)
         else:
             if '-' in name:
                 splits = name.split('-')
                 g = ('-1',0)
                 for s in splits:
-                    if name_dict.get(s,-1)!=-1 and name_dict[s]>g[1]:
-                        g = (s,name_dict[s])
+                    if name_dict.get(s,-1)!=-1:
+
+                        obj = json.loads(name_dict[s])
+                        ge = obj['gender']
+                        gp = obj['probability']
+                        if gp>g[1]:
+                            g = (ge,gp)
 
                 if g[0]!='-1':
                     genders.append(g[0])
