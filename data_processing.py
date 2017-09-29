@@ -131,9 +131,9 @@ def percent_of_request(genderpath):
     name_list = []
     for row in cursor:
         # name  = ','.join(row)
-        name_set.append(row[0].lower())
+        name_list.append(row[0].lower())
 
-    print 'article authors:',len(name_set)
+    print 'article authors:',len(name_list)
 
     ## add advisors' name
     sql = 'select adviser_name from proquest_article_adviser'
