@@ -128,7 +128,7 @@ def percent_of_request(genderpath):
     sql = 'select first_name,middle_name,last_name from  proquest_article_authorname'
     cursor  = query_op.query_database(sql)
 
-    name_set = []
+    name_list = []
     for row in cursor:
         # name  = ','.join(row)
         name_set.append(row[0].lower())
