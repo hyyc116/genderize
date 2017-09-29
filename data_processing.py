@@ -165,7 +165,7 @@ def percent_of_request(genderpath):
     gc = Counter(genders)
     print 'total:',len(name_list),'with gender:',len(genders),'percent = {:.2f}'.format(len(genders)/float(len(name_list)))
     for g in gc.keys():
-        print 'gender:',g,'num:'mgc[g]
+        print 'gender:',g,'num:',gc[g]
 
 if __name__ == '__main__':
     # anames = retrive_proquest_unique_names()
