@@ -107,7 +107,13 @@ def generate_dict(lines,index):
 
         result_dict = {}
         result_dict['State'] = k
-        result_dict['freq'] = Counter(v)
+
+        new_counter =  Counter(v)
+        gg_counter = {}
+        for gg in ['MM','MF','FM','FF']:
+            gg_counter[gg] = new_counter.get(gg,0)
+
+        result_dict['freq'] = gg_counter
         count_index+=1
         if count_index >9:
             break
