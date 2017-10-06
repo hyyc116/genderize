@@ -60,7 +60,13 @@ def gender_of_name(name,name_dict):
         else:
             return None
     else:
-        return json.loads(name_dict[name])['gender']
+
+        if name_dict.get(name,-1)!=-1:
+
+            return json.loads(name_dict[name])['gender']
+            
+        else:
+            return None
 
 if __name__ == '__main__':
     get_gender_data(sys.argv[1])
