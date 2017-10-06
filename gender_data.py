@@ -33,17 +33,50 @@ def gen_stats(filepath):
             elif au_gender=='female':
                 gender_type='FF'
 
-        degree = splits[3]
-        school = splits[4]
-        year = splits[5]
-        cats = splits[6]
+        degree = degree_process(splits[3])
+        school = school_process(splits[4])
+        year = year_process(splits[5])
+        cats = cats_process(splits[6])
         country = splits[7]
 
-        lines.append([gender_type,degree,school,year,cats,country])
+        for cat in cats:
+            lines.append([gender_type,degree,school,year,cat,country])
 
-    print generate_dict(lines,1)
+    degree_result =  generate_dict(lines,1)
+    school_result = generate_dict(lines,2)
+    year_result = generate_dict(lines,3)
+    cat_result = generate_dict(lines,4)
+    coutnry_result = generate_dict(lines,5)
 
+    data = open('gender_data.js','a')
 
+    data.write('var degree_data = {:}\n'.format(degree_result))
+    data.write('var school_data = {:}\n'.format(school_result))
+    data.write('var year_data = {:}\n'.format(year_result))
+    data.write('var cat_data = {:}\n'.format(cat_result))
+    data.write('var country_data = {:}\n'.format(coutnry_result))
+
+    data.close()
+
+def year_process(year):
+    return '{:}- '.format((year/10)*10)
+
+def degree_process(degree):
+    return degree
+
+def school_process(school):
+    return school
+
+def country_process(country):
+    return country
+
+def cats_process(cat):
+    cats = cat.split(";")
+    fc =[]
+    for cat in cats:
+        fc.append(cat.replace('&#124','').split('-')[1])
+
+    return list(set(fc))
 
 def generate_dict(lines,index):
     attr_dict = defaultdict(list)
