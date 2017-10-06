@@ -59,7 +59,7 @@ def gen_stats(filepath):
     data.close()
 
 def year_process(year):
-    return '{:}- '.format((year/10)*10)
+    return '{:}- '.format((int(year)/10)*10)
 
 def degree_process(degree):
     return degree
