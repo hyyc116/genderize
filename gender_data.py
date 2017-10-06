@@ -74,7 +74,7 @@ def cats_process(cat):
     cats = cat.split(";")
     fc =[]
     for cat in cats:
-        print cat
+        # print cat
         if '-' in cat:
             for c in cat.split('-')[1].split(','):
                 fc.append(c.replace('&#124','').replace('&#39',''))
