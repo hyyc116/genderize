@@ -59,6 +59,8 @@ def gen_stats(filepath):
     data.close()
 
 def year_process(year):
+    if year == '':
+        return '-1111'
     return '{:}- '.format((int(year)/10)*10)
 
 def degree_process(degree):
@@ -87,7 +89,8 @@ def generate_dict(lines,index):
     for line in lines:
         gender_type = line[0]
         attr = line[index]
-
+        if attr=='-1111':
+            continue
         attr_dict[attr].append(gender_type)
 
         # attr_count[attr]+=1
