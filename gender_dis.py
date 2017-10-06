@@ -36,7 +36,7 @@ def get_gender_data(genderpath):
     paper_count =0 
     for row in cursor:
         ditm_id = row[0]
-        print row[1].split(':'),'=',row[2]
+        # print row[1].split(':'),'=',row[2]
 
         adviser_names = row[1].split(':')
 
