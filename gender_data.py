@@ -50,11 +50,11 @@ def gen_stats(filepath):
 
     data = open('gender_data.js','a')
 
-    data.write('var degree_data = {:}\n'.format(degree_result))
-    data.write('var school_data = {:}\n'.format(school_result))
-    data.write('var year_data = {:}\n'.format(year_result))
-    data.write('var cat_data = {:}\n'.format(cat_result))
-    data.write('var country_data = {:}\n'.format(coutnry_result))
+    data.write('var degree_data = {:};\n'.format(degree_result))
+    data.write('var school_data = {:};\n'.format(school_result))
+    data.write('var year_data = {:};\n'.format(year_result))
+    data.write('var cat_data = {:};\n'.format(cat_result))
+    data.write('var country_data = {:};\n'.format(coutnry_result))
 
     data.close()
 
