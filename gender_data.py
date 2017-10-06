@@ -6,6 +6,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 from collections import Counter
 from collections import defaultdict
+import os
 
 def gen_stats(filepath):
 
@@ -48,6 +49,9 @@ def gen_stats(filepath):
     cat_result = generate_dict(lines,4)
     coutnry_result = generate_dict(lines,5)
 
+    if os.path.exists('gender_data.js'):
+        os.remove('gender_data.js')
+        
     data = open('gender_data.js','a')
 
     data.write('var degree_data = {:};\n'.format(degree_result))
@@ -61,7 +65,7 @@ def gen_stats(filepath):
 def year_process(year):
     if year == '':
         return '-1111'
-    return '{:}- '.format((int(year)/10)*10)
+    return int(year)/10*10
 
 def degree_process(degree):
     return degree
