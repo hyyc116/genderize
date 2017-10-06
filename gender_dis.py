@@ -17,11 +17,16 @@ def get_gender_data(genderpath):
             name_dict[splits[1]] = splits[-1]
 
 
+    # sql='''
+    #     select proquest_article_adviser.ditm_id,ADVISER_NAME,FIRST_NAME,DEGREE,SCHOOL_NAME,DEGREE_YEAR,SUBJECTS,COUNTRY 
+    #     from proquest_article_adviser,proquest_article_authorname, proquest_raw
+    #     where proquest_article_adviser.ditm_id = proquest_article_authorname.ditm_id
+    #     and proquest_raw.ditm_id = proquest_article_authorname.ditm_id
+    #     '''
+
     sql='''
-        select proquest_article_adviser.ditm_id,ADVISER_NAME,FIRST_NAME,DEGREE,SCHOOL_NAME,DEGREE_YEAR,SUBJECTS,COUNTRY 
-        from proquest_article_adviser,proquest_article_authorname, proquest_raw
-        where proquest_article_adviser.ditm_id = proquest_article_authorname.ditm_id
-        and proquest_raw.ditm_id = proquest_article_authorname.ditm_id
+        select ditm_id,DITM_ADVISER,AUTHOR_NAME,DEGREE,SCHOOL_NAME,DEGREE_YEAR,SUBJECTS,COUNTRY 
+        from proquest_raw
         '''
 
     query_op = dbop()
@@ -32,7 +37,7 @@ def get_gender_data(genderpath):
     for row in cursor:
         ditm_id = row[0]
         adviser_first_name = row[1].split()[0].lower()
-        author_first_name = row[2].lower()
+        author_first_name = row[2].split(',')[1].lower()
         degree = row[3]
         school_name = row[4]
         degree_year = row[5]
@@ -45,8 +50,6 @@ def get_gender_data(genderpath):
         author_gender = gender_of_name(author_first_name,name_dict)
 
         if adviser_gender is not None and author_gender is not None:
-            # adviser_genders.append(adviser_gender)
-            # author_genders.append(author_gender)
             lines.append('===='.join([str(a) for a in [ditm_id,adviser_gender,author_gender,degree,school_name,degree_year,subject,country]]))
 
     print paper_count,len(lines),len(lines)/float(paper_count)
