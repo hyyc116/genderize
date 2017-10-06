@@ -72,7 +72,7 @@ def generate_dict(lines,index):
         results.append(result_dict)
 
 
-    return results
+    return json.dumps(results)
 
 
 if __name__ == '__main__':
