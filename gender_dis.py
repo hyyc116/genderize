@@ -37,21 +37,25 @@ def get_gender_data(genderpath):
     for row in cursor:
         ditm_id = row[0]
         print row[1],'=',row[2]
-        adviser_first_name = row[1].split()[0].lower()
-        author_first_name = row[2].split(',')[1].lower()
-        degree = row[3]
-        school_name = row[4]
-        degree_year = row[5]
-        subject = row[6]
-        country = row[7]
+        adviser_names = row[1].split(':')[1].strip().split(';')
 
-        paper_count+=1
+        for adviser_name in adviser_names:
+            adviser_first_name = adviser_name.split()[0]
 
-        adviser_gender = gender_of_name(adviser_first_name,name_dict)
-        author_gender = gender_of_name(author_first_name,name_dict)
+            author_first_name = row[2].split(',')[1].split()[0].strip().lower()
+            degree = row[3]
+            school_name = row[4]
+            degree_year = row[5]
+            subject = row[6]
+            country = row[7]
 
-        if adviser_gender is not None and author_gender is not None:
-            lines.append('===='.join([str(a) for a in [ditm_id,adviser_gender,author_gender,degree,school_name,degree_year,subject,country]]))
+            paper_count+=1
+            
+            adviser_gender = gender_of_name(adviser_first_name,name_dict)
+            author_gender = gender_of_name(author_first_name,name_dict)
+
+            if adviser_gender is not None and author_gender is not None:
+                lines.append('===='.join([str(a) for a in [ditm_id,adviser_gender,author_gender,degree,school_name,degree_year,subject,country]]))
 
     print paper_count,len(lines),len(lines)/float(paper_count)
 
