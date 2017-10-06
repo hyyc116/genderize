@@ -31,8 +31,8 @@ def get_gender_data(genderpath):
 
         paper_count+=1
 
-        adviser_gender = gender_of_name(adviser_first_name)
-        author_gender = gender_of_name(author_first_name)
+        adviser_gender = gender_of_name(adviser_first_name,name_dict)
+        author_gender = gender_of_name(author_first_name,name_dict)
 
         if adviser_gender is not None and author_gender is not None:
             adviser_genders.append(adviser_gender)
