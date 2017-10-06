@@ -53,12 +53,12 @@ def generate_dict(lines,index):
 
         attr_dict[attr].append(gender_type)
 
-    print attr_dict
+    # print attr_dict
     result_dict = {}
     ## 根据属性对应的数量进行排序
-    for k in sorted(attr_dict.items(),key=lambda x:len(x[1]),reverse=True)[10]:
+    for k,v in sorted(attr_dict.items(),key=lambda x:len(x[1]),reverse=True)[10]:
 
-        print k
+        print k,v
 
         result_dict['State'] = k
         result_dict['freq'] = Counter(v)
