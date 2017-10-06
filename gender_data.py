@@ -114,6 +114,8 @@ def generate_dict(lines,index):
 
         results.append(result_dict)
 
+    results = sorted(results,key=lambda x:x['State'])
+
 
     return json.dumps(results)
 

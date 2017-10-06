@@ -45,7 +45,7 @@ rect:hover {  fill:blue; }
 <h1>Country</h1>
 <div id ='country_zone'></div>
 <h1>Filed</h1>
-<div id ='filed_zone'></div>
+<div id ='field_zone'></div>
 <h1>Time</h1>
 <div id ='time_zone'></div>
 
@@ -252,22 +252,16 @@ function dashboard(id, fData){
 </script>
 
 <script>
-var freqData=[
-{"State": "Ph.D.", "freq": {"MM": 328401, "MF": 222121, "FM": 64770, "FF": 112780}}, 
-{"State": "M.S.", "freq": {"MM": 27360, "MF": 18587, "FM": 5872, "FF": 12111}}, 
-{"State": "Ed.D.", "freq": {"MM": 15371, "MF": 21251, "FM": 6239, "FF": 15620}}, 
-{"State": "M.A.", "freq": {"MM": 14187, "MF": 18914, "FM": 5483, "FF": 16075}}, 
-{"State": "M.Sc.", "freq": {"MM": 9600, "MF": 7971, "FM": 1833, "FF": 3463}}, 
-{"State": "Psy.D.", "freq": {"MM": 1644, "MF": 3671, "FM": 887, "FF": 3165}}, 
-{"State": "D.M.A.", "freq": {"MM": 3046, "MF": 1926, "FM": 624, "FF": 861}}, 
-{"State": "D.Min.", "freq": {"MM": 3217, "MF": 694, "FM": 574, "FF": 306}}, 
-{"State": "M.S.W.", "freq": {"MM": 259, "MF": 902, "FM": 422, "FF": 2179}}
-];
+var degree_data = [{"State": "Ph.D.", "freq": {"MM": 728743, "MF": 520543, "FM": 158442, "FF": 285602}}, {"State": "M.S.", "freq": {"MM": 63063, "MF": 45413, "FM": 14377, "FF": 30694}}, {"State": "Ed.D.", "freq": {"MM": 36409, "MF": 51583, "FM": 16387, "FF": 41033}}, {"State": "M.A.", "freq": {"MM": 32475, "MF": 44171, "FM": 13682, "FF": 39793}}, {"State": "M.Sc.", "freq": {"MM": 18956, "MF": 17008, "FM": 3778, "FF": 7627}}, {"State": "Psy.D.", "freq": {"MM": 4421, "MF": 10217, "FM": 2531, "FF": 9143}}, {"State": "D.Min.", "freq": {"MM": 7678, "MF": 1823, "FM": 1418, "FF": 835}}, {"State": "D.M.A.", "freq": {"MM": 4032, "MF": 2699, "FM": 864, "FF": 1321}}, {"State": "M.S.W.", "freq": {"MM": 439, "MF": 1715, "FM": 837, "FF": 4243}}];
+var school_data = [{"State": "University of Michigan", "freq": {"MM": 16272, "MF": 10743, "FM": 3784, "FF": 6271}}, {"State": "The University of Texas at Austin", "freq": {"MM": 14192, "MF": 9701, "FM": 3067, "FF": 5771}}, {"State": "University of California, Berkeley", "freq": {"MM": 15246, "MF": 9440, "FM": 2991, "FF": 4565}}, {"State": "The University of Wisconsin - Madison", "freq": {"MM": 14912, "MF": 9427, "FM": 2917, "FF": 4504}}, {"State": "University of Minnesota", "freq": {"MM": 12913, "MF": 9961, "FM": 2848, "FF": 5844}}, {"State": "University of California, Los Angeles", "freq": {"MM": 12532, "MF": 9912, "FM": 2990, "FF": 5290}}, {"State": "The Ohio State University", "freq": {"MM": 11761, "MF": 8449, "FM": 2709, "FF": 5095}}, {"State": "University of Maryland, College Park", "freq": {"MM": 11317, "MF": 8732, "FM": 2310, "FF": 5328}}, {"State": "University of Illinois at Urbana-Champaign", "freq": {"MM": 13595, "MF": 6965, "FM": 2578, "FF": 3676}}];
+var year_data = [{"State": 2000, "freq": {"MM": 465087, "MF": 383185, "FM": 128049, "FF": 258002}}, {"State": 1990, "freq": {"MM": 306700, "MF": 210561, "FM": 50078, "FF": 98346}}, {"State": 2010, "freq": {"MM": 116822, "MF": 100520, "FM": 40254, "FF": 81720}}, {"State": 1980, "freq": {"MM": 50356, "MF": 30951, "FM": 5890, "FF": 11233}}, {"State": 1970, "freq": {"MM": 781, "MF": 416, "FM": 48, "FF": 112}}, {"State": 1960, "freq": {"MM": 416, "MF": 144, "FM": 26, "FF": 7}}, {"State": 1950, "freq": {"MM": 291, "MF": 14, "FM": 43, "FF": 14}}, {"State": 1940, "freq": {"MM": 41, "MF": 17, "FM": 2}}, {"State": 1930, "freq": {"MM": 11}}];
+var cat_data = [{"State": "Education", "freq": {"MM": 36942, "MF": 54115, "FM": 16061, "FF": 45197}}, {"State": "Biology", "freq": {"MM": 56350, "MF": 47386, "FM": 12392, "FF": 16488}}, {"State": "Engineering", "freq": {"MM": 82129, "MF": 25372, "FM": 9979, "FF": 4910}}, {"State": "Psychology", "freq": {"MM": 20433, "MF": 33753, "FM": 8244, "FF": 26440}}, {"State": "Health Sciences", "freq": {"MM": 20395, "MF": 27052, "FM": 7630, "FF": 29119}}, {"State": "Chemistry", "freq": {"MM": 31343, "MF": 17624, "FM": 3974, "FF": 3605}}, {"State": "Literature", "freq": {"MM": 12105, "MF": 14815, "FM": 5103, "FF": 11326}}, {"State": " General", "freq": {"MM": 16757, "MF": 10512, "FM": 3672, "FF": 4939}}, {"State": "Sociology", "freq": {"MM": 9329, "MF": 11247, "FM": 3723, "FF": 10200}}];
+var country_data = [{"State": "UNITED STATES", "freq": {"MM": 855604, "MF": 655142, "FM": 204719, "FF": 408204}}, {"State": "CANADA", "freq": {"MM": 72981, "MF": 61660, "FM": 15911, "FF": 36381}}, {"State": "PUERTO RICO", "freq": {"MM": 2739, "MF": 2318, "FM": 924, "FF": 1619}}, {"State": "CHINA", "freq": {"MM": 2607, "MF": 2472, "FM": 1220, "FF": 1240}}, {"State": "SPAIN", "freq": {"MM": 2996, "MF": 1955, "FM": 802, "FF": 1082}}, {"State": "SOUTH AFRICA", "freq": {"MM": 702, "MF": 402, "FM": 219, "FF": 277}}, {"State": "BELGIUM", "freq": {"MM": 562, "MF": 479, "FM": 80, "FF": 83}}, {"State": "HUNGARY", "freq": {"MM": 485, "MF": 287, "FM": 190, "FF": 193}}, {"State": "ISRAEL", "freq": {"MM": 335, "MF": 264, "FM": 56, "FF": 81}}];
 
-dashboard('#degree_zone',freqData);
-dashboard('#school_zone',freqData);
-dashboard('#country_zone',freqData);
-dashboard('#filed_zone',freqData);
-dashboard('#time_zone',freqData);
+dashboard('#degree_zone',degree_data);
+dashboard('#school_zone',school_data);
+dashboard('#country_zone',country_data);
+dashboard('#field_zone',cat_data);
+dashboard('#time_zone',year_data);
 
 </script>
