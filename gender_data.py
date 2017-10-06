@@ -47,19 +47,19 @@ def gen_stats(filepath):
 
 def generate_dict(lines,index):
     attr_dict = defaultdict(list)
-    attr_count = defaultdict(int)
+    # attr_count = defaultdict(int)
     for line in lines:
         gender_type = line[0]
         attr = line[index]
 
         attr_dict[attr].append(gender_type)
 
-        attr_count[attr]+=1
+        # attr_count[attr]+=1
 
     # print attr_dict
     result_dict = {}
     ## 根据属性对应的数量进行排序
-    for k,v in sorted(attr_count.items(),key=lambda x:x[1],reverse=True)[10]:
+    for k in sorted(attr_dict.items(),key=lambda x:len(x[1]),reverse=True)[10]:
 
         result_dict['State'] = k
         result_dict['freq'] = Counter(attr_dict[k])
