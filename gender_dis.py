@@ -16,18 +16,27 @@ def get_gender_data(genderpath):
             # g = json.loads(splits[-1])['gender']
             name_dict[splits[1]] = splits[-1]
 
-    adviser_genders=[]
-    author_genders=[]
-    sql='select proquest_article_adviser.ditm_id,ADVISER_NAME,FIRST_NAME from proquest_article_adviser,proquest_article_authorname where proquest_article_adviser.ditm_id = proquest_article_authorname.ditm_id'
+
+    sql='''
+        select proquest_article_adviser.ditm_id,ADVISER_NAME,FIRST_NAME,DEGREE,SCHOOL_NAME,DEGREE_YEAR,SUBJECTS,COUNTRY 
+        from proquest_article_adviser,proquest_article_authorname, proquest_raw
+        where proquest_article_adviser.ditm_id = proquest_article_authorname.ditm_id
+        and proquest_raw.ditm_id = proquest_article_authorname.ditm_id
+        '''
 
     query_op = dbop()
     query_op.connect_aws()
     cursor  = query_op.query_database(sql)
-
+    lines = []
     paper_count =0 
     for row in cursor:
         adviser_first_name = row[1].split()[0].lower()
         author_first_name = row[2].lower()
+        degree = row[3]
+        school_name = row[4]
+        degree_year = row[5]
+        subject = row[6]
+        country = row[7]
 
         paper_count+=1
 
@@ -35,11 +44,13 @@ def get_gender_data(genderpath):
         author_gender = gender_of_name(author_first_name,name_dict)
 
         if adviser_gender is not None and author_gender is not None:
-            adviser_genders.append(adviser_gender)
-            author_genders.append(author_gender)
+            # adviser_genders.append(adviser_gender)
+            # author_genders.append(author_gender)
+            lines.append([str(a) for a in [adviser_gender,author_gender,degree,school_name,degree_year,subject,country]])
 
-    print paper_count,len(adviser_genders),len(author_genders),len(adviser_genders)/float(paper_count)
-        
+    print paper_count,len(lines),len(lines)/float(paper_count)
+
+    open('proquest_genders.txt','w').write('\n'.join(lines))
 
 
 def gender_of_name(name,name_dict):
