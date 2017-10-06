@@ -48,6 +48,8 @@ def get_gender_data(genderpath):
         print adviser_names
 
         for adviser_name in adviser_names:
+            if adviser_name=='':
+                continue
             adviser_first_name = adviser_name.strip().split()[0].lower()
 
             if ',' in row[2]:
