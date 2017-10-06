@@ -46,7 +46,7 @@ def get_gender_data(genderpath):
         if adviser_gender is not None and author_gender is not None:
             # adviser_genders.append(adviser_gender)
             # author_genders.append(author_gender)
-            lines.append(','.join([str(a) for a in [adviser_gender,author_gender,degree,school_name,degree_year,subject,country]]))
+            lines.append('===='.join([str(a) for a in [adviser_gender,author_gender,degree,school_name,degree_year,subject,country]]))
 
     print paper_count,len(lines),len(lines)/float(paper_count)
 
