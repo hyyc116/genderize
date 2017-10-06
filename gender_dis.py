@@ -45,6 +45,8 @@ def get_gender_data(genderpath):
 
         adviser_names = adviser_names[1].strip().split(';')
 
+        print adviser_names
+
         for adviser_name in adviser_names:
             adviser_first_name = adviser_name.strip().split()[0].lower()
 
