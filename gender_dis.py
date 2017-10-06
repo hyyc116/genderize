@@ -38,7 +38,7 @@ def get_gender_data(genderpath):
             adviser_genders.append(adviser_gender)
             author_genders.append(author_gender)
 
-    print paper_count,len(adviser_genders),len(adviser_genders)/float(paper_count)
+    print paper_count,len(adviser_genders),len(author_name),len(adviser_genders)/float(paper_count)
         
 
 
