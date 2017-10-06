@@ -46,8 +46,12 @@ def get_gender_data(genderpath):
         adviser_names = adviser_names[1].strip().split(';')
 
         for adviser_name in adviser_names:
-            adviser_first_name = adviser_name.strip().split()[0]
-            author_first_name = row[2].split(',')[1].split()[0].strip().lower()
+            adviser_first_name = adviser_name.strip().split()[0].lower()
+
+            if ',' in row[2]:
+                author_first_name = row[2].split(',')[1].split()[0].strip().lower()
+            else:
+                author_first_name = row[2].split()[0].strip().lower()
             degree = row[3]
             school_name = row[4]
             degree_year = row[5]
