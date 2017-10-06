@@ -38,11 +38,15 @@ def get_gender_data(genderpath):
         ditm_id = row[0]
         print row[1].split(':'),'=',row[2]
 
-        adviser_names = row[1].split(':')[1].strip().split(';')
+        adviser_names = row[1].split(':')
+
+        if len(adviser_names)<2:
+            continue
+
+        adviser_names = adviser_names[1].strip().split(';')
 
         for adviser_name in adviser_names:
-            adviser_first_name = adviser_name.split()[0]
-
+            adviser_first_name = adviser_name.strip().split()[0]
             author_first_name = row[2].split(',')[1].split()[0].strip().lower()
             degree = row[3]
             school_name = row[4]
