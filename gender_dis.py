@@ -30,6 +30,7 @@ def get_gender_data(genderpath):
     lines = []
     paper_count =0 
     for row in cursor:
+        ditm_id = row[0]
         adviser_first_name = row[1].split()[0].lower()
         author_first_name = row[2].lower()
         degree = row[3]
@@ -46,7 +47,7 @@ def get_gender_data(genderpath):
         if adviser_gender is not None and author_gender is not None:
             # adviser_genders.append(adviser_gender)
             # author_genders.append(author_gender)
-            lines.append('===='.join([str(a) for a in [adviser_gender,author_gender,degree,school_name,degree_year,subject,country]]))
+            lines.append('===='.join([str(a) for a in [ditm_id,adviser_gender,author_gender,degree,school_name,degree_year,subject,country]]))
 
     print paper_count,len(lines),len(lines)/float(paper_count)
 
