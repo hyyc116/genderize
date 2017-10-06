@@ -57,19 +57,22 @@ def generate_dict(lines,index):
         # attr_count[attr]+=1
 
     # print attr_dict
-    result_dict = {}
     ## 根据属性对应的数量进行排序
     count_index=0
+    results = []
     for k,v in sorted(attr_dict.items(),key=lambda x:len(x[1]),reverse=True):
-        print k,len(v)
+
+        result_dict = {}
         result_dict['State'] = k
         result_dict['freq'] = Counter(v)
         count_index+=1
         if count_index >9:
             break
 
+        results.append(result_dict)
 
-    return result_dict
+
+    return results
 
 
 if __name__ == '__main__':
